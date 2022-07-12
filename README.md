@@ -10,5 +10,6 @@ cd /whist
 
 docker-compose up -d 
 
-
 docker-compose scale app1=3
+
+docker restart whist_nginx_1
