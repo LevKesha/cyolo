@@ -5,6 +5,8 @@ services:
     expose:
       - "5000"
   nginx:
-    build: ./nginx  
+    build: ./nginx
+    depends_on:
+      - app1  
     ports:
     - "9090:80"
