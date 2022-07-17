@@ -13,4 +13,4 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: cd ./app1 && docker build . --file Dockerfile --tag app1:latest --tag app1:${GITHUB_SHA::6}
+      run: cd ./app1 && docker build . --file Dockerfile --tag app1:latest --tag app1:${GITHUB_REF#refs/heads/}.${GITHUB_SHA::6}
