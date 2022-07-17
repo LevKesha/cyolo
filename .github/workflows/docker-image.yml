@@ -32,4 +32,5 @@ jobs:
       run: |
         cd ./app1
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:latest -t $ECR_REGISTRY/$ECR_REPOSITORY:${GITHUB_REF#refs/heads/}.${GITHUB_SHA::6} .
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest && docker push $ECR_REGISTRY/$ECR_REPOSITORY:${GITHUB_REF#refs/heads/}.${GITHUB_SHA::6}
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:${GITHUB_REF#refs/heads/}.${GITHUB_SHA::6}
