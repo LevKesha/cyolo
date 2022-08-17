@@ -13,7 +13,7 @@ end = datetime.today()
 telaviv = Point(32.0853, 34.7818, 5)
 
 cel = Daily(telaviv, start, end)
-cel = cel.fetch()
+cel = str(cel.fetch())
 
 app = Flask(__name__)
 
