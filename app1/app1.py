@@ -1,5 +1,5 @@
 from flask import Flask, render_template
-from datetime import date, datetime
+from datetime import datetime
 from meteostat import Point, Daily
 import socket
 
@@ -7,8 +7,8 @@ import socket
 hostname = socket.gethostname()    
 IPAddr = socket.gethostbyname(hostname)
 
-start = datetime(date.today())
-end = datetime(date.today())
+start = datetime.today()
+end = datetime.today()
 
 telaviv = Point(32.0853, 34.7818, 5)
 
