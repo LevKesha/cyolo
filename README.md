@@ -1,4 +1,4 @@
-# Silverfort
+=
 
 ENV pre-requisite:
   docker, docker-compose 
