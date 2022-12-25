@@ -1,0 +1,77 @@
+vouch:
+  logLevel: info
+  listen: 0.0.0.0  # VOUCH_LISTEN
+  port: 9090       # VOUCH_PORT
+
+  # document_root - VOUCH_DOCUMENT_ROOT
+  # see README for `Vouch Proxy "in a path"` - https://github.com/vouch/vouch-proxy#vouch-proxy-in-a-path
+  # document_root: vp_in_a_path
+  allowAllUsers: True
+
+
+  # Setting publicAccess: true will accept all requests, even without a valid jwt/cookie.  - VOUCH_PUBLICACCESS
+  # If the user is logged in, the cookie will be validated and the user header will be set.
+  # You will need to direct people to the Vouch Proxy login page from your application.
+  publicAccess: True
+
+  tls:
+    profile: intermediate                           # VOUCH_TLS_PROFILE
+
+  jwt:
+    # number of minutes until jwt expires - VOUCH_JWT_MAXAGE
+    maxAge: 240
+
+    # compress the jwt - VOUCH_JWT_COMPRESS
+    compress: true 
+
+  cookie: 
+    # name of cookie to store the jwt - VOUCH_COOKIE_NAME
+    #name: VouchCookie
+    domain: avocado.lol
+
+    # optionally force the domain of the cookie to set
+    # domain: yourdomain.com # VOUCH_COOKIE_DOMAIN
+
+    # Set `secure: false` when protecting a non-https site such as http://app.yourdmain.com - VOUCH_COOKIE_SECURE
+    secure: true
+
+    # httpOnly: true # VOUCH_COOKIE_HTTPONLY
+
+    # Number of minutes until session cookie expires - VOUCH_COOKIE_MAXAGE
+    # Set cookie maxAge to 0 to delete the cookie every time the browser is closed.
+    # Must not be longer than jwt.maxAge
+    maxAge: 240
+
+    # Set SameSite attribute to restrict browser behaviour wrt sending the cookie along with cross-site requests. - VOUCH_COOKIE_SAMESITE
+    # Possible attribute values lax, strict, none.
+    # If attribute not specified then cross-site behaviour will depend on the browser used. If sameSite=none then secure must be set to true
+    # More context: https://github.com/vouch/vouch-proxy/issues/210
+    sameSite: lax
+
+  session:
+    # name of session variable stored locally - VOUCH_SESSION_NAME
+    name: VouchSession
+    # number of minutes for maximum session age, configuring how long the user has to login at their IdP (defaults to 5) - VOUCH_SESSION_MAXAGE
+    maxAge: 5
+
+  headers:
+    jwt: X-Vouch-Token                # VOUCH_HEADERS_JWT
+    querystring: access_token         # VOUCH_HEADERS_QUERYSTRING
+    redirect: X-Vouch-Requested-URI   # VOUCH_HEADERS_REDIRECT
+
+oauth:
+  # Generic OpenID Connect
+  provider: oidc
+  client_id: 0oa7r21kfz99GThs85d7
+  client_secret: lp36R0VYaKHmTO5mS2pfOSFpNy2FKdKolI9NOHAG
+  auth_url: https://dev-45602822.okta.com/oauth2/default/v1/authorize
+  token_url: https://dev-45602822.okta.com/oauth2/default/v1/token
+  user_info_url: https://dev-45602822.okta.com/oauth2/default/v1/userinfo
+  # end_session_endpoint is usually the IdP's logout URL
+  # see https://github.com/vouch/vouch-proxy/pull/258
+  end_session_endpoint: https://dev-45602822.okta.com/oauth2/default/v1/logout
+  scopes:
+    - openid
+    - email
+    - profile
+  callback_url: https://login.avocado.lol:9090/auth

@@ -10,3 +10,9 @@ services:
       - app  
     ports:
     - 443:443
+  vouch:
+    build: ./vouch
+    depends_on:
+      - nginx
+    ports:
+    - 9090
